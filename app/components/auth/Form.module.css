@@ -7,9 +7,35 @@
   flex: 1 1 0%;
   flex-direction: column;
   padding: 2rem;
+  color: #000;
   background-color: #e4e4e7;
   border-width: 0px;
   border-radius: 0.5rem;
+}
+
+@media (max-width: 450px) {
+  .signIn .input {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .signIn {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .nameContainer {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 451px) {
+  .signIn .input {
+    padding: 0.4rem 8rem 0.4rem 0.5rem;
+  }
+  .signIn {
+    padding: 4rem;
+  }
 }
 
 .input {
@@ -53,6 +79,11 @@
 
 .link:hover {
   text-decoration: underline;
+}
+
+.nameContainer {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .button {

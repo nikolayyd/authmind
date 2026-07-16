@@ -33,14 +33,14 @@ export const Form = ({ signingUp }: FormProps) => {
 
   return (
     <div>
-      <div className={styles.container}>
+      <div className={` ${styles.container} ${!signingUp ? styles.signIn : ''} `}>
         <h1 className="self-center text-4xl font-bold">AuthMind</h1>
         <form
           onSubmit={handleSubmit(onSubmit, onInvalid)}
           className="flex flex-col gap-2 my-8"
         >
           {signingUp && (
-            <div className="flex gap-1">
+            <div className={styles.nameContainer}>
               {' '}
               <input
                 {...register('firstName')}
