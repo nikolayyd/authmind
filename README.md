@@ -1,4 +1,3 @@
-cat <<EOF > README.md
 # AuthMind
 
 A modern authentication-focused application built with React, Zod for schema validation, and Prisma for database management.
