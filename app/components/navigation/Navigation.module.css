@@ -1,0 +1,31 @@
+::selection {
+  background-color: #c9c9d4;
+}
+
+.nav {
+  display: flex;
+  flex: 1 1 0%;
+  height: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: center; */
+  padding: 0.5rem;
+  color: #f4f4f5;
+  background-color: #52525b;
+}
+
+.item {
+  padding: 0.5rem;
+  transition: background-color 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.item:hover {
+  background-color: #71717a;
+}
+
+.active {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+}
