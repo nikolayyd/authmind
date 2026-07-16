@@ -28,7 +28,9 @@ export const Form = ({ signingUp }: FormProps) => {
     reValidateMode: 'onChange',
   });
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    console.log()
+  };
   const onInvalid = () => {};
 
   return (
