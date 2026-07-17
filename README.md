@@ -3,14 +3,16 @@
 A modern authentication-focused application built with React, Zod for schema validation, and Prisma for database management.
 
 ## 🚀 Tech Stack
-* **Framework:** React (Next.js)
-* **Validation:** Zod
-* **Database:** Prisma ORM
-* **Styling:** CSS Modules
+
+- **Framework:** React (Next.js)
+- **Validation:** Zod
+- **Database:** Prisma ORM
+- **Styling:** CSS Modules
 
 ## 📦 Getting Started
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
@@ -19,6 +21,7 @@ A modern authentication-focused application built with React, Zod for schema val
    Create a .env file and add your DATABASE_URL.
 
 3. **Initialize Prisma:**
+
    ```bash
    npx prisma generate
    npx prisma db push
@@ -28,4 +31,3 @@ A modern authentication-focused application built with React, Zod for schema val
    ```bash
    npm run dev
    ```
-EOF
