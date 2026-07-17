@@ -12,11 +12,14 @@ datasource db {
 model User {
   id            String          @id @default(uuid())
   email         String          @unique
+  firstName     String
+  lastName      String
   passwordHash  String?
   isVerified    Boolean         @default(false)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   refreshTokens RefreshToken[]
+  @@map("users")
 }
 
 model RefreshToken {
@@ -27,6 +30,6 @@ model RefreshToken {
   expiresAt   DateTime
   revokedAt   DateTime?
   createdAt   DateTime  @default(now())
-
   @@index([userId])
+  @@map("refresh_tokens")
 }

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 import { Prisma } from '../../lib/generated/prisma/client';
 
-export function handleUserApiError(error: unknown) {
+export const handleUserApiError = (error: unknown) => {
   if (error instanceof ZodError) {
     return NextResponse.json(
       { message: 'Validation failed', errors: error.flatten().fieldErrors },
