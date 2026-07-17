@@ -6,6 +6,7 @@ import { hashToken } from '../utils/crypto';
 import jwt from 'jsonwebtoken';
 import { prisma } from '../db';
 import bcrypt from 'bcrypt';
+import { omitPasswordHash } from '../utils/sanitize';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
@@ -41,8 +42,7 @@ export const authService = {
     const user = await userService.create(data);
     const tokens = await this.issueTokens(user.id);
 
-    const { passwordHash, ...safeUser } = user;
-    return { user: safeUser, ...tokens };
+    return { user: omitPasswordHash(user), ...tokens };
   },
   async signIn(input: unknown) {
     const data = signInSchema.parse(input);
@@ -57,8 +57,7 @@ export const authService = {
 
     const tokens = await this.issueTokens(user.id);
 
-    const { passwordHash, ...safeUser } = user;
-    return { user: safeUser, ...tokens };
+    return { user: omitPasswordHash(user), ...tokens };
   },
   async signOut(refreshToken: string) {
     const hashedToken = hashToken(refreshToken);
