@@ -2,45 +2,15 @@
 
 import { signInSchema, signUpSchema } from '@/lib/schemas/auth';
 import { userService } from './user.service';
-import { hashToken } from '../utils/crypto';
-import jwt from 'jsonwebtoken';
-import { prisma } from '../db';
 import bcrypt from 'bcrypt';
 import { omitPasswordHash } from '../utils/sanitize';
-
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
-const ACCESS_TOKEN_EXPIRES_IN = '5m';
-const REFRESH_TOKEN_EXPIRES_IN = '30m';
+import { tokenService } from './token.service';
 
 export const authService = {
-  async issueTokens(userId: string) {
-    const accessToken = jwt.sign({ sub: userId }, ACCESS_TOKEN_SECRET, {
-      expiresIn: ACCESS_TOKEN_EXPIRES_IN,
-    });
-    const refreshToken = jwt.sign({ sub: userId }, REFRESH_TOKEN_SECRET, {
-      expiresIn: REFRESH_TOKEN_EXPIRES_IN,
-    });
-
-    const hashedToken = hashToken(refreshToken);
-
-    const expiresAt = new Date();
-    expiresAt.setMinutes(expiresAt.getMinutes() + 30);
-
-    await prisma.refreshToken.create({
-      data: {
-        hashedToken,
-        userId,
-        expiresAt,
-      },
-    });
-
-    return { accessToken, refreshToken };
-  },
   async signUp(input: unknown) {
     const data = signUpSchema.parse(input);
     const user = await userService.create(data);
-    const tokens = await this.issueTokens(user.id);
+    const tokens = await tokenService.issueTokens(user.id);
 
     return { user: omitPasswordHash(user), ...tokens };
   },
@@ -55,16 +25,11 @@ export const authService = {
       throw new Error('Invalid credentials');
     }
 
-    const tokens = await this.issueTokens(user.id);
+    const tokens = await tokenService.issueTokens(user.id);
 
     return { user: omitPasswordHash(user), ...tokens };
   },
   async signOut(refreshToken: string) {
-    const hashedToken = hashToken(refreshToken);
-
-    await prisma.refreshToken.updateMany({
-      where: { hashedToken },
-      data: { revokedAt: new Date() },
-    });
+    await tokenService.revokeRefreshToken(refreshToken);
   },
 };

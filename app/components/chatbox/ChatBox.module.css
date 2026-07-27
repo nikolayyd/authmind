@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  margin-bottom: 0em;
+
+  max-width: 15rem;
+  /* border: 1px solid black; */
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    visibility 0.5s ease;
+  pointer-events: auto;
+}
+
+.containerHidden {
+  opacity: 0;
+  transform: scaleY(0);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.chatArea {
+  height: 20rem;
+  padding: 0.25rem;
+  overflow-y: auto;
+}
+
+.questionWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid black;
+  padding: 0.3rem;
+}
+
+.questionInput {
+  padding: 0.2rem;
+  outline: none;
+}
+
+.submitQuestion {
+  cursor: pointer;
+  padding: 0.2rem;
+  width: 20px;
+  height: 20px;
+}

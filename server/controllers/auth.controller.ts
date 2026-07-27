@@ -1,7 +1,7 @@
 // /server/controller/auth.controller.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { handleUserApiError } from '../utils/api-handler';
+import { handleUserApiError } from '../utils/user.handler';
 import { authService } from '../services/auth.service';
 import { clearAuthCookies } from '../utils/cookies';
 
@@ -27,7 +27,6 @@ export const AuthController = {
   async signOut(req: NextRequest) {
     try {
       const refreshToken = req.cookies?.get?.('refreshToken')?.value;
-      // В route handler-и, req е стандартен Request - виж бележката по-долу
 
       if (refreshToken) {
         await authService.signOut(refreshToken);

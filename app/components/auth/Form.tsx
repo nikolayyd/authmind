@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import {
   signInSchema,
   // SignInInput,
@@ -9,6 +10,7 @@ import {
   // SignUpInput,
 } from '@/lib/schemas/auth';
 import styles from './Form.module.css';
+import { useState } from 'react';
 
 interface FormProps {
   signingUp: boolean;
@@ -16,12 +18,14 @@ interface FormProps {
 
 export const Form = ({ signingUp }: FormProps) => {
   const schema = signingUp ? signUpSchema : signInSchema;
-
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitted },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useForm<any>({
     resolver: zodResolver(schema),
     mode: 'onBlur',
@@ -29,13 +33,15 @@ export const Form = ({ signingUp }: FormProps) => {
   });
 
   const onSubmit = () => {
-    console.log()
+    console.log();
   };
   const onInvalid = () => {};
 
   return (
     <div>
-      <div className={` ${styles.container} ${!signingUp ? styles.signIn : ''} `}>
+      <div
+        className={` ${styles.container} ${!signingUp ? styles.signIn : ''} `}
+      >
         <h1 className="self-center text-4xl font-bold">AuthMind</h1>
         <form
           onSubmit={handleSubmit(onSubmit, onInvalid)}
@@ -44,39 +50,75 @@ export const Form = ({ signingUp }: FormProps) => {
           {signingUp && (
             <div className={styles.nameContainer}>
               {' '}
-              <input
-                {...register('firstName')}
-                type="text"
-                className={`${styles.input} ${errors.firstName ? styles.inputError : ''}`}
-                placeholder="First Name"
-              />
-              <input
-                {...register('lastName')}
-                type="text"
-                className={`${styles.input} ${errors.lastName ? styles.inputError : ''}`}
-                placeholder="Last Name"
-              />
+              <div
+                className={`${styles.divInput} ${errors.firstName ? styles.inputError : ''}`}
+              >
+                <input
+                  {...register('firstName')}
+                  type="text"
+                  className={styles.input}
+                  placeholder="First Name"
+                />
+              </div>
+              <div
+                className={`${styles.divInput} ${errors.lastName ? styles.inputError : ''}`}
+              >
+                <input
+                  {...register('lastName')}
+                  type="text"
+                  className={styles.input}
+                  placeholder="Last Name"
+                />
+              </div>
             </div>
           )}
-          <input
-            {...register('email')}
-            type="email"
-            className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
-            placeholder="Email"
-          />
-          <input
-            {...register('password')}
-            type="password"
-            className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
-            placeholder="Password"
-          />
-          {signingUp && (
+          <div
+            className={`${styles.divInput} ${errors.lastName ? styles.inputError : ''}`}
+          >
             <input
-              {...register('confirmPassword')}
-              type="password"
-              className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
-              placeholder="Confirm password"
+              {...register('email')}
+              className={styles.input}
+              type="email"
+              placeholder="Email"
             />
+          </div>
+          <div
+            className={`${styles.divInput} ${errors.lastName ? styles.inputError : ''}`}
+          >
+            <input
+              {...register('password')}
+              type={isPasswordVisible ? 'text' : 'password'}
+              className={styles.input}
+              placeholder="Password"
+            />
+            <div className={styles.passwordIcon}>
+              {isPasswordVisible ? (
+                <FaEyeSlash onClick={() => setIsPasswordVisible(false)} />
+              ) : (
+                <FaEye onClick={() => setIsPasswordVisible(true)} />
+              )}
+            </div>
+          </div>
+          {signingUp && (
+            <div
+              className={`${styles.divInput} ${errors.lastName ? styles.inputError : ''}`}
+            >
+              <input
+                {...register('confirmPassword')}
+                type={isConfirmPasswordVisible ? 'text' : 'password'}
+                className={styles.input}
+                placeholder="Confirm password"
+              />
+              <div className={styles.passwordIcon}>
+                {isConfirmPasswordVisible ? (
+                  <FaEyeSlash
+                    onClick={() => setIsConfirmPasswordVisible(false)}
+                  />
+                ) : (
+                  <FaEye onClick={() => setIsConfirmPasswordVisible(true)} />
+                )}
+              </div>
+            </div>
           )}
           <button className={styles.button} type="submit">
             {signingUp ? 'Sign Up' : 'Sign In'}

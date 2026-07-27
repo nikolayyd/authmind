@@ -38,31 +38,46 @@
   }
 }
 
-.input {
+.divInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition-property:
     color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-duration: 300ms;
   border: 2px solid #d4d4d8;
   background-color: #f4f4f5;
   border-radius: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
   font-size: 1rem;
   color: #3f3f46;
 }
 
-.input:focus {
-  outline: none;
+.divInput:focus {
   border-color: #a1a1aa;
 }
 
-.input::placeholder {
+
+.input {
+  flex: 1;
+}
+.input:focus {
+  outline: none;
+}
+
+.divInput::placeholder {
   font-size: 1rem;
   font-style: italic;
   color: #3f3f46;
 }
 
-.input:focus::placeholder {
+.divInput:focus::placeholder {
   color: transparent;
+}
+
+.passwordIcon {
+  padding: 0.2rem;
+  cursor: pointer;
 }
 
 .paragraph {
@@ -119,3 +134,4 @@
   text-align: center;
   /* animation: fadeIn 0.3s ease-in-out; */
 }
+

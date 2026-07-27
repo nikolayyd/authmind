@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Navigation } from './components/navigation/Navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { ChatWrapper } from './components/chatbox/ChatWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -12,7 +13,6 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
-
 
 export const metadata: Metadata = {
   title: 'AuthMind',
@@ -33,9 +33,12 @@ const RootLayout = ({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navigation/>
+        <Navigation />
         {children}
-        </body>
+        <>
+          <ChatWrapper />
+        </>
+      </body>
     </html>
   );
 };

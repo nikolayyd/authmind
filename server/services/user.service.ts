@@ -33,7 +33,7 @@ export const userService = {
     return prisma.user.findMany();
   },
 
-  async getById(id: string) {
+  async findById(id: string) {
     return prisma.user.findUnique({
       where: { id },
       select: {
