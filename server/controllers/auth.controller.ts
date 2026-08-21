@@ -1,4 +1,4 @@
-// /server/controller/auth.controller.ts
+// /server/controllers/auth.controller.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { handleUserApiError } from '../utils/user.handler';

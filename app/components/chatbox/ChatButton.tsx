@@ -1,3 +1,5 @@
+// /app/components/chatbox/ChatButton.tsx
+
 import { FaRobot } from 'react-icons/fa';
 import styles from './ChatButton.module.css';
 

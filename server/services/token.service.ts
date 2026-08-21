@@ -48,17 +48,29 @@ export const tokenService = {
       sub: string;
     };
     const hashedToken = hashToken(refreshToken);
+
     const stored = await prisma.refreshToken.findUnique({
       where: { hashedToken },
     });
 
-    if (!stored || stored.revokedAt) {
+    if (!stored) {
       throw new Error('Refresh token has been revoked');
+    }
+
+    if (stored.revokedAt) {
+      await prisma.refreshToken.updateMany({
+        where: { userId: stored.userId, revokedAt: null },
+        data: { revokedAt: new Date() },
+      });
+
+
+      throw new Error('Refresh token reuse detected — all sessions revoked');
     }
 
     if (stored.expiresAt < new Date()) {
       throw new Error('Refresh token has expired');
     }
+
     await prisma.refreshToken.update({
       where: { id: stored.id },
       data: { revokedAt: new Date() },

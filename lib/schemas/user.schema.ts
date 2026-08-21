@@ -1,3 +1,4 @@
+// /lib/schemas/user.schema.ts
 import { z } from 'zod';
 
 export const baseSchema = z.object({
@@ -12,7 +13,11 @@ export const baseSchema = z.object({
     .min(6, { message: 'Confirm password is required' }),
 });
 
-export const signInSchema = baseSchema.pick({ email: true, password: true });
+// export const signInSchema = baseSchema.pick({ email: true, password: true });
+export const signInSchema = z.object({
+  email: z.string().email({ message: 'Email address is required' }),
+  password: z.string().min(1, { message: 'Password is required' }),
+});
 export const signUpSchema = baseSchema.refine(
   (data) => data.password === data.confirmPassword,
   {
@@ -23,3 +28,9 @@ export const signUpSchema = baseSchema.refine(
 
 export type SignInInput = z.infer<typeof signInSchema>;
 export type SignUpInput = z.infer<typeof signUpSchema>;
+
+export type FetchUser = {
+  firstName: string;
+  lastName: string;
+  email: string;
+};

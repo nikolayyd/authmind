@@ -1,4 +1,4 @@
-// server/utils/sanitize.ts
+// /server/utils/sanitize.ts
 export function omitPasswordHash<T extends { passwordHash?: string | null }>(
   user: T,
 ): Omit<T, 'passwordHash'> {

@@ -1,6 +1,8 @@
+// /server/utils/user.handler.ts
+
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
-import { Prisma } from '../../lib/generated/prisma/client';
+import { Prisma } from '@/lib/generated/prisma/client';
 
 export const handleUserApiError = (error: unknown) => {
   if (error instanceof ZodError) {
@@ -29,4 +31,4 @@ export const handleUserApiError = (error: unknown) => {
     { message: 'Internal Server Error' },
     { status: 500 },
   );
-}
+};

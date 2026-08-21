@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
-  margin-bottom: 0em;
-
-  max-width: 15rem;
+  margin-bottom: 0.25em;
+  max-width: 18rem;
   /* border: 1px solid black; */
   background: #ffffff;
   border-radius: 16px;
@@ -30,15 +29,28 @@
   pointer-events: none;
 }
 
+.headerChat {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.7rem;
+  width: 100%;
+  background-color: #e4e4e7;
+}
+
+.closeButton {
+  cursor: pointer;
+}
+
 .chatArea {
-  height: 20rem;
-  padding: 0.25rem;
+  height: 18rem;
+  padding: 0.75rem;
   overflow-y: auto;
 }
 
 .questionWrapper {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   border-top: 1px solid black;
   padding: 0.3rem;
@@ -51,7 +63,8 @@
 
 .submitQuestion {
   cursor: pointer;
-  padding: 0.2rem;
+  margin: 0.2rem;
+  padding: 0.1rem;
   width: 20px;
   height: 20px;
 }

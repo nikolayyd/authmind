@@ -1,3 +1,4 @@
+// /app/components/chatbox/ChatWrapper.tsx
 'use client';
 import { useState } from 'react';
 import { ChatBox } from './ChatBox';
@@ -8,7 +9,7 @@ export const ChatWrapper = () => {
   const [hidingChat, setHidingChat] = useState<boolean>(false);
   return (
     <div className={styles.wrapper}>
-      <ChatBox isHiding={hidingChat} />
+      <ChatBox isHiding={hidingChat} setIsHiding={setHidingChat} />
       <ChatButton
         onClick={() => {
           setHidingChat(!hidingChat);

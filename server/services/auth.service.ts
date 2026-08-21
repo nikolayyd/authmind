@@ -1,6 +1,6 @@
 // /server/services/auth.service.ts
 
-import { signInSchema, signUpSchema } from '@/lib/schemas/auth';
+import { signInSchema, signUpSchema } from '@/lib/schemas/user.schema';
 import { userService } from './user.service';
 import bcrypt from 'bcrypt';
 import { omitPasswordHash } from '../utils/sanitize';

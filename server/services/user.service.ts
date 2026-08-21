@@ -1,7 +1,7 @@
 // /server/services/user.service.ts
 
-import { prisma } from '../db';
-import { Prisma } from '../../lib/generated/prisma/client';
+import { prisma } from '@/server/db';
+import { Prisma } from '@/lib/generated/prisma/client';
 import bcrypt from 'bcrypt';
 import { type SignUpInput } from '@/server/validations/user.schema';
 
@@ -70,4 +70,5 @@ export const userService = {
       where: { id },
     });
   },
+  // async me() {},
 };

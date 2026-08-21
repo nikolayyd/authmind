@@ -1,4 +1,4 @@
-// server/utils/cookies.ts
+// /server/utils/cookies.ts
 
 import { NextResponse } from 'next/server';
 
